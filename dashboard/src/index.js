@@ -4,6 +4,7 @@ import * as d3 from "d3";
 import updateTemp from "./temp-display";
 import { updateValue } from "./utils";
 import { setupPID, receivePIDUpdate } from "./pid-optimizer";
+import './boolean-box';
 
 const WHEEL_PORT_X = 25 + 50/2;
 const WHEEL_STARBOARD_X = 200 + 50/2;
@@ -116,6 +117,9 @@ function onNetworkTablesConnection(connected) {
         $("#nt tbody > tr").remove();
 
         console.log(NetworkTables.getKeys())
+
+        $('frc-boolean-box').attr('label', connected ? 'NT Connected' : 'NT Disconnected');
+        $('frc-boolean-box')[0].value = connected;
 
     } else {
         $("#connectstate").text("Disconnected!");
